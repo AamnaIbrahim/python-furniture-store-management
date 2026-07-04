@@ -11,6 +11,10 @@ def addRecord():
             print("Invalid ID! Please enter a number.")
             continue
 
+        if id < 0:
+            print("ID cannot be negative!")
+            continue
+
         if id in furniture:
             print("This id is already assigned to another item")
         else:
@@ -20,6 +24,10 @@ def addRecord():
                 price = float(input("Enter Furniture's price :"))
             except ValueError:
                 print("Invalid price! Please enter a number.")
+                continue
+
+            if price < 0:
+                print("Price cannot be negative!")
                 continue
 
             furniture.append(id)
@@ -94,7 +102,11 @@ def updateRecord():
                         elif choice1 == 2:
                             furniture[i+2] = input("Enter new material : ")
                         elif choice1 == 3:
-                            furniture[i+3] = float(input("Enter new price : "))
+                            new_price = float(input("Enter new price : "))
+                            if new_price < 0:
+                                print("Price cannot be negative!")
+                                continue
+                            furniture[i+3] = new_price
                         else:
                             print("Invalid option")
                             continue
