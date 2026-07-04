@@ -11,6 +11,10 @@ def addSales():
             print("Invalid CNIC! Please enter a number.")
             continue
 
+        if cid < 0:
+            print("CNIC cannot be negative!")
+            continue
+
         if cid in customer:
             sales.append(cid)
             for i in range(0, len(customer)):
@@ -24,6 +28,11 @@ def addSales():
             except ValueError:
                 print("Invalid furniture ID! Please enter a number.")
                 # remove the customer info we just added since the sale wasn't completed
+                del sales[-4:]
+                continue
+
+            if fid < 0:
+                print("Furniture ID cannot be negative!")
                 del sales[-4:]
                 continue
 
@@ -66,6 +75,10 @@ def searchsale():
             cid = int(input("Enter customer id from which your order is booked : "))
         except ValueError:
             print("Invalid ID! Please enter a number.")
+            continue
+
+        if cid < 0:
+            print("CNIC cannot be negative!")
             continue
 
         found = False
