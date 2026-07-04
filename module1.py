@@ -1,75 +1,115 @@
 furniture = []
+
 def addRecord():
-    flag='y'
+    flag = 'y'
     print("**ADDING YOUR RECORD**")
-    while flag=='y':
+    while flag == 'y':
         print()
-        id=int(input("Enter Furniture's ID :"))
+        try:
+            id = int(input("Enter Furniture's ID :"))
+        except ValueError:
+            print("Invalid ID! Please enter a number.")
+            continue
+
         if id in furniture:
             print("This id is already assigned to another item")
         else:
-            furniture. append(id)
-            type=input("Enter Furniture's type :")
+            try:
+                type = input("Enter Furniture's type :")
+                material = input("Enter Furniture's material :")
+                price = float(input("Enter Furniture's price :"))
+            except ValueError:
+                print("Invalid price! Please enter a number.")
+                continue
+
+            furniture.append(id)
             furniture.append(type)
-            material=input("Enter Furniture's material :")
             furniture.append(material)
-            price=int(input("Enter Furniture's price :"))
             furniture.append(price)
-            flag = input("Enter y to continue adding records: ")
+
+        flag = input("Enter y to continue adding records: ")
+
+
 def viewRecord():
     print("\nwe have following record:")
     print("ID\t\tTYPE\t\tMATERIAL\t\tPRICE")
-    for i in range(0,len(furniture),4):
-        print(furniture[i],"\t\t",furniture[i+1],"\t\t",furniture[i+2],"\t\t",furniture[i+3])
+    try:
+        for i in range(0, len(furniture), 4):
+            print(furniture[i], "\t\t", furniture[i+1], "\t\t", furniture[i+2], "\t\t", furniture[i+3])
+    except IndexError:
+        print("Error displaying records: data appears to be corrupted.")
+
 
 def searchRecord():
-    check='y'
-    while check=='y':
-        searchid=int(input("enter id you wanna search : "))
+    check = 'y'
+    while check == 'y':
+        try:
+            searchid = int(input("enter id you wanna search : "))
+        except ValueError:
+            print("Invalid ID! Please enter a number.")
+            continue
+
         if searchid in furniture:
-            for i in range(0,len(furniture),4):
-                if searchid==furniture[i]:
-                    print("ID = ",furniture[i])
+            for i in range(0, len(furniture), 4):
+                if searchid == furniture[i]:
+                    print("ID = ", furniture[i])
                     print("Type = ", furniture[i+1])
                     print("Material = ", furniture[i+2])
                     print("Price = ", furniture[i+3])
-            check=input("Enter y if you want to check again : ")
+            check = input("Enter y if you want to check again : ")
         else:
             print("Record not found")
-            flag=int(input("Press 1 to search again or zero to exit"))
-            if flag==0:
+            try:
+                flag = int(input("Press 1 to search again or zero to exit"))
+            except ValueError:
+                print("Invalid input, exiting search.")
+                break
+            if flag == 0:
                 break
 
 
 def updateRecord():
-    check='y'
-    flag=0
-    while check=='y':
-        updatef=int(input("Enter furniture id you want to update : "))
+    check = 'y'
+    while check == 'y':
+        try:
+            updatef = int(input("Enter furniture id you want to update : "))
+        except ValueError:
+            print("Invalid ID! Please enter a number.")
+            continue
+
         if updatef in furniture:
-            for i in range(0,len(furniture),4):
-                if updatef==furniture[i]:
+            for i in range(0, len(furniture), 4):
+                if updatef == furniture[i]:
                     print("Current information regarding this id is : ")
-                    print("1.Type=",furniture[i+1],", 2.Material=",furniture[i+2],", 3.Price=",furniture[i+3])
-                    choice1=int(input("What you want to update : "))
-                    if choice1==1:
-                        furniture[i+1]=input("Enter new furniture type: ")
-                    elif choice1==2:
-                        furniture[i+2]=input("Enter new material : ")
-                    elif choice1==3:
-                        furniture[i+3]=input("Enter new price : ")
+                    print("1.Type=", furniture[i+1], ", 2.Material=", furniture[i+2], ", 3.Price=", furniture[i+3])
+                    try:
+                        choice1 = int(input("What you want to update : "))
+                    except ValueError:
+                        print("Invalid choice! Please enter a number.")
+                        continue
+
+                    try:
+                        if choice1 == 1:
+                            furniture[i+1] = input("Enter new furniture type: ")
+                        elif choice1 == 2:
+                            furniture[i+2] = input("Enter new material : ")
+                        elif choice1 == 3:
+                            furniture[i+3] = float(input("Enter new price : "))
+                        else:
+                            print("Invalid option")
+                            continue
+                    except ValueError:
+                        print("Invalid price! Please enter a number.")
+                        continue
+
                     print(" data updated successfully")
-            check=input("Enter y if want to update more ")
+            check = input("Enter y if want to update more ")
         else:
             print("Record not found")
-            flag=int(input("Press 1 to enter ID again or zero to exit"))
-            if flag==0:
+            try:
+                flag = int(input("Press 1 to enter ID again or zero to exit"))
+            except ValueError:
+                print("Invalid input, exiting update.")
                 break
-
-
-
-
-
-
-
-
+            if flag == 0:
+                break
