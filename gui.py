@@ -62,7 +62,6 @@ class FurnitureStoreApp(tk.Tk):
 
         tk.Label(header, text="Furniture Store Manager", bg=BG, fg=TEXT,
                  font=("Segoe UI", 20, "bold")).pack(side="left", padx=20)
-        
 
     # ---------------- TABS ----------------
     def _build_tabs(self):
@@ -79,7 +78,6 @@ class FurnitureStoreApp(tk.Tk):
 
         # Refresh sales dropdowns whenever the tab is clicked
         notebook.bind("<<NotebookTabChanged>>", lambda e: self.sales_tab.refresh_dropdowns())
-
 
 
 # FURNITURE TAB
@@ -188,6 +186,13 @@ class FurnitureTab(tk.Frame):
             messagebox.showerror("Invalid input", "ID must be a number and Price must be a number.")
             return
 
+        if fid < 0:
+            messagebox.showerror("Invalid input", "ID cannot be negative.")
+            return
+        if price < 0:
+            messagebox.showerror("Invalid input", "Price cannot be negative.")
+            return
+
         if not ftype or not material:
             messagebox.showerror("Invalid input", "Type and Material cannot be empty.")
             return
@@ -218,6 +223,10 @@ class FurnitureTab(tk.Frame):
             price = float(self.entries["Price"].get())
         except ValueError:
             messagebox.showerror("Invalid input", "Price must be a number.")
+            return
+
+        if price < 0:
+            messagebox.showerror("Invalid input", "Price cannot be negative.")
             return
 
         for i in range(0, len(module1.furniture), 4):
@@ -338,6 +347,16 @@ class CustomerTab(tk.Frame):
             messagebox.showerror("Invalid input", "CNIC, Phone, and Age must be numbers.")
             return
 
+        if cnic < 0:
+            messagebox.showerror("Invalid input", "CNIC cannot be negative.")
+            return
+        if phone < 0:
+            messagebox.showerror("Invalid input", "Phone number cannot be negative.")
+            return
+        if age < 0:
+            messagebox.showerror("Invalid input", "Age cannot be negative.")
+            return
+
         if not name:
             messagebox.showerror("Invalid input", "Name cannot be empty.")
             return
@@ -370,6 +389,13 @@ class CustomerTab(tk.Frame):
             messagebox.showerror("Invalid input", "Phone and Age must be numbers.")
             return
 
+        if phone < 0:
+            messagebox.showerror("Invalid input", "Phone number cannot be negative.")
+            return
+        if age < 0:
+            messagebox.showerror("Invalid input", "Age cannot be negative.")
+            return
+
         for i in range(0, len(module2.customer), 4):
             if module2.customer[i] == cnic:
                 module2.customer[i+1] = name
@@ -380,7 +406,6 @@ class CustomerTab(tk.Frame):
         messagebox.showinfo("Success", "Customer record updated!")
         self.clear_form()
         self.refresh_table()
-
 
 
 # SALES TAB
