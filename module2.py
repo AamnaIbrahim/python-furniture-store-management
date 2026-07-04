@@ -11,6 +11,10 @@ def addCustomer():
             print("Invalid CNIC! Please enter a number.")
             continue
 
+        if id < 0:
+            print("CNIC cannot be negative!")
+            continue
+
         if id in customer:
             print("This cnic is already registered try another one")
         else:
@@ -20,6 +24,13 @@ def addCustomer():
                 age = int(input("Customers age : "))
             except ValueError:
                 print("Invalid phone number or age! Please enter numbers only.")
+                continue
+
+            if phone < 0:
+                print("Phone number cannot be negative!")
+                continue
+            if age < 0:
+                print("Age cannot be negative!")
                 continue
 
             customer.append(id)
@@ -85,9 +96,17 @@ def updateCustomer():
                         if choice1 == 1:
                             customer[i+1] = input("Enter new name : ")
                         elif choice1 == 2:
-                            customer[i+2] = int(input("Enter phone number : "))
+                            new_phone = int(input("Enter phone number : "))
+                            if new_phone < 0:
+                                print("Phone number cannot be negative!")
+                                continue
+                            customer[i+2] = new_phone
                         elif choice1 == 3:
-                            customer[i+3] = int(input("Enter new age : "))
+                            new_age = int(input("Enter new age : "))
+                            if new_age < 0:
+                                print("Age cannot be negative!")
+                                continue
+                            customer[i+3] = new_age
                         else:
                             print("Invalid option")
                             continue
